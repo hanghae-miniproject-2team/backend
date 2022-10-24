@@ -1,5 +1,6 @@
 package com.emergency.challenge.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -33,6 +35,9 @@ public class Member extends Timestamped {
     @JsonIgnore
     private String password;
 
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Post> posts;
 
     @Override
     public boolean equals(Object o) {
