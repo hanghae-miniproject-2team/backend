@@ -1,0 +1,82 @@
+package com.emergency.challenge.controller;
+
+import com.emergency.challenge.controller.request.PostRequestDto;
+import com.emergency.challenge.controller.response.ResponseDto;
+import com.emergency.challenge.domain.UserDetailsImpl;
+import com.emergency.challenge.service.PostService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+@RequiredArgsConstructor
+@RestController
+@CustomBaseControllerAnnotation
+public class PostController {
+
+  private final PostService postService;
+
+//  @ApiImplicitParams({
+//          @ApiImplicitParam(
+//                  name = "Refresh-Token",
+//                  required = true,
+//                  dataType = "string",
+//                  paramType = "header"
+//          )
+//  })
+
+  // 게시글 작성
+  @PostMapping(value = "/auth/post")
+  public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto,
+                                   HttpServletRequest request) {
+    return postService.createPost(requestDto, request);
+  }
+
+  // 게시글 조회
+  @GetMapping(value = "/post/{id}")
+  public ResponseDto<?> getPost(@PathVariable Long id) {
+    return postService.getPost(id);
+  }
+
+  // 작성한 게시글 조회 (마이페이지)
+  // 조건 : 인증된 정보로 현재 로그인된 유저가 작성한 게시글을 특정하여 조회
+  @GetMapping(value = "/auth/post")
+  public ResponseDto<?> getUserPost(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    return postService.getMyPost(userDetails);
+  }
+
+  // 게시글 전체 조회
+//  @GetMapping(value = "/post")
+//  public ResponseDto<?> getAllPosts(
+//          @RequestParam int page,
+//          @RequestParam int size,
+//          @RequestParam String sortBy,
+//          @RequestParam boolean isAsc
+//  ) {
+//     page = page-1;
+//    return postService.getAllPost(page,size,sortBy,isAsc);
+//  }
+
+  @GetMapping(value = "/post")
+  public ResponseDto<?> getAllPosts(@PageableDefault(page =0, size = 10 ,sort ="title",direction = Sort.Direction.DESC) Pageable pageable){
+    return postService.getAllPost(pageable);
+  }
+
+  // 게시글 수정
+  @PutMapping(value = "/auth/post/{id}")
+  public ResponseDto<?> updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
+      HttpServletRequest request) {
+    return postService.updatePost(id, postRequestDto, request);
+  }
+
+  // 게시글 삭제
+  @DeleteMapping(value = "/auth/post/{id}")
+  public ResponseDto<?> deletePost(@PathVariable Long id,
+      HttpServletRequest request) {
+    return postService.deletePost(id, request);
+  }
+}
