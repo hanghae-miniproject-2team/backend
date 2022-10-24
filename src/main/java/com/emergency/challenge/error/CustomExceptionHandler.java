@@ -14,14 +14,14 @@ import java.util.List;
 @RestControllerAdvice
 public class CustomExceptionHandler{
 
-//    서버 에러
-    @ExceptionHandler({ Exception.class })
-    protected ResponseEntity<Object> handleServerException(Exception ex) {
-        RestApiException error= new RestApiException(ErrorCode.INTERNAL_SERVER_ERROR.name(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(error);
-    }
+////    서버 에러
+//    @ExceptionHandler({ Exception.class })
+//    protected ResponseEntity<Object> handleServerException(Exception ex) {
+//        RestApiException error= new RestApiException(ErrorCode.INTERNAL_SERVER_ERROR.name(), ErrorCode.INTERNAL_SERVER_ERROR.getMessage());
+//        return ResponseEntity
+//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(error);
+//    }
     //바인드 에러
     @ExceptionHandler({BindException.class})
     protected ResponseEntity<Object> handleServerException(BindException ex) {

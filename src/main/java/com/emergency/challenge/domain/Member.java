@@ -35,9 +35,13 @@ public class Member extends Timestamped {
     @JsonIgnore
     private String password;
 
-    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Comment> comments;
 
     @Override
     public boolean equals(Object o) {

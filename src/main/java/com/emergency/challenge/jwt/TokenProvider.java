@@ -36,7 +36,7 @@ public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_PREFIX = "Bearer ";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 2;            //30분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;            //30분
     private static final long REFRESH_TOKEN_EXPRIRE_TIME = 1000 * 60 * 60 * 24 * 7;     //7일
 
     private final Key key;
@@ -152,7 +152,7 @@ public class TokenProvider {
     public ResponseDto<?> deleteRefreshToken(Member member) {
         RefreshToken refreshToken = isPresentRefreshToken(member);
         if (null == refreshToken) {
-            return ResponseDto.fail("TOKEN_NOT_FOUND", ErrorCode.INVALID_TOKEN.getStatus(), "존재하지 않는 Token 입니다.");
+            return ResponseDto.fail("TOKEN_NOT_FOUND", "존재하지 않는 Token 입니다.");
         }
 
         refreshTokenRepository.delete(refreshToken);

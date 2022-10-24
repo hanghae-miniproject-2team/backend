@@ -8,19 +8,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@Getter
 public class Comment extends Timestamped {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "comment_id", nullable = false)
-    private Long id;        // 댓글 고유 id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // OneToMany
+    @Column
+    private Long responseTo;
+
     @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
@@ -28,15 +29,14 @@ public class Comment extends Timestamped {
     @JoinColumn(name = "post_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
-    @Column (name = "comment", nullable = false)
-    private String comment;  // 댓글
 
-
-
+    @Column(nullable = false)
+    private String content;
 
     public void update(CommentRequestDto commentRequestDto) {
-        this.comment = commentRequestDto.getComment();
+        this.content = commentRequestDto.getContent();
     }
+
     public boolean validateMember(Member member) {
         return !this.member.equals(member);
     }

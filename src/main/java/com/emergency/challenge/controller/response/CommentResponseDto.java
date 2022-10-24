@@ -7,16 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentResponseDto {
     private Long id;
-    private String nickname;
-    private String comment;
+    private String author;
+    private String content;
+    private Long responseTo;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-
-
 }
