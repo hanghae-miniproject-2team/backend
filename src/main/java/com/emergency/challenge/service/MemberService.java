@@ -38,12 +38,12 @@ public class MemberService {
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
         if (null != isPresentMember(requestDto.getNickname())) {
             return ResponseDto.fail(ErrorCode.ALREADY_SAVED_ID.name(),
-                    ErrorCode.ALREADY_SAVED_ID.getMessage());
+                     ErrorCode.ALREADY_SAVED_ID.getMessage());
         }
 
         if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
             return ResponseDto.fail(ErrorCode.PASSWORDS_NOT_MATCHED.name(),
-                    ErrorCode.PASSWORDS_NOT_MATCHED.getMessage());
+                     ErrorCode.PASSWORDS_NOT_MATCHED.getMessage());
         }
 
         Member member = Member.builder()
@@ -71,7 +71,7 @@ public class MemberService {
         Member member = isPresentMember(requestDto.getNickname());
         if (null == member) {
             return ResponseDto.fail(ErrorCode.MEMBER_NOT_FOUND.name(),
-                    ErrorCode.MEMBER_NOT_FOUND.getMessage());
+                     ErrorCode.MEMBER_NOT_FOUND.getMessage());
         }
 
         if (!member.validatePassword(passwordEncoder, requestDto.getPassword())) {
@@ -105,7 +105,7 @@ public class MemberService {
         Member member = tokenProvider.getMemberFromAuthentication();
         if (null == member) {
             return ResponseDto.fail(ErrorCode.MEMBER_NOT_FOUND.name(),
-                    ErrorCode.MEMBER_NOT_FOUND.getMessage());
+                     ErrorCode.MEMBER_NOT_FOUND.getMessage());
         }
         return tokenProvider.deleteRefreshToken(member);
     }

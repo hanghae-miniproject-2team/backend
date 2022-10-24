@@ -5,9 +5,9 @@ import com.emergency.challenge.controller.response.TokenDto;
 import com.emergency.challenge.domain.Member;
 import com.emergency.challenge.domain.RefreshToken;
 import com.emergency.challenge.domain.UserDetailsImpl;
+import com.emergency.challenge.error.ErrorCode;
 import com.emergency.challenge.repository.RefreshTokenRepository;
 import com.emergency.challenge.service.UserDetailsServiceImpl;
-import com.emergency.challenge.shared.Authority;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -152,7 +152,7 @@ public class TokenProvider {
     public ResponseDto<?> deleteRefreshToken(Member member) {
         RefreshToken refreshToken = isPresentRefreshToken(member);
         if (null == refreshToken) {
-            return ResponseDto.fail("TOKEN_NOT_FOUND", "존재하지 않는 Token 입니다.");
+            return ResponseDto.fail("TOKEN_NOT_FOUND", ErrorCode.INVALID_TOKEN.getStatus(), "존재하지 않는 Token 입니다.");
         }
 
         refreshTokenRepository.delete(refreshToken);
