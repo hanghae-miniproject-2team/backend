@@ -58,6 +58,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/member/**").permitAll()
+                .antMatchers("/api/comment/**").permitAll()
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/v2/api-docs",
                         "/swagger-resources",

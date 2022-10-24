@@ -1,6 +1,7 @@
 package com.emergency.challenge.jwt;
 
 import com.emergency.challenge.controller.response.ResponseDto;
+import com.emergency.challenge.error.ErrorCode;
 import com.emergency.challenge.service.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -60,7 +61,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 response.setContentType("application/json;charset=UTF-8");
                 response.getWriter().println(
                         new ObjectMapper().writeValueAsString(
-                                ResponseDto.fail("BAD_REQUEST", "Token이 유효햐지 않습니다.")
+                                ResponseDto.fail("BAD_REQUEST", ErrorCode.INVALID_TOKEN.getStatus(), "Token이 유효햐지 않습니다.")
                         )
                 );
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @RestController
+@CustomBaseControllerAnnotation
 public class CommentController {
     private final CommentService commentService;
 

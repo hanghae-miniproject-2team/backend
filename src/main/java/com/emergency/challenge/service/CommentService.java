@@ -5,6 +5,7 @@ import com.emergency.challenge.controller.response.CommentResponseDto;
 import com.emergency.challenge.controller.response.ResponseDto;
 import com.emergency.challenge.domain.Comment;
 import com.emergency.challenge.domain.Member;
+import com.emergency.challenge.error.ErrorCode;
 import com.emergency.challenge.jwt.TokenProvider;
 import com.emergency.challenge.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -97,12 +98,12 @@ public class CommentService {
     public ResponseDto<?> updateComment(Long id, CommentRequestDto requestDto, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
+                     "로그인이 필요합니다.");
         }
 
         if (null == request.getHeader("Authorization")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
+                     "로그인이 필요합니다.");
         }
 
         Member member = validateMember(request);
@@ -140,12 +141,12 @@ public class CommentService {
     public ResponseDto<?> deleteComment(Long id, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
+                     "로그인이 필요합니다.");
         }
 
         if (null == request.getHeader("Authorization")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
-                    "로그인이 필요합니다.");
+                     "로그인이 필요합니다.");
         }
 
         Member member = validateMember(request);
@@ -155,7 +156,7 @@ public class CommentService {
 
         Comment comment = isPresentComment(id);
         if (null == comment) {
-            return ResponseDto.fail("NOT_FOUND", "존재하지 않는 댓글 id 입니다.");
+            return ResponseDto.fail("NOT_FOUND",  "존재하지 않는 댓글 id 입니다.");
         }
 
         if (comment.validateMember(member)) {

@@ -1,6 +1,7 @@
 package com.emergency.challenge.jwt;
 
 import com.emergency.challenge.controller.response.ResponseDto;
+import com.emergency.challenge.error.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
