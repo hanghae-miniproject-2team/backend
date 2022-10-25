@@ -23,11 +23,11 @@ public class LikesService {
     private final PostRepository postRepository;
 
     public ResponseDto<?> likesUp (Long postId , UserDetailsImpl userDetails) {
-        System.out.println(postId);
         Member member = userDetails.getMember();
+
         Post post = postService.isPresentPost(postId);
-        System.out.println("asdasds" + post);
-        //라이크 디비에서 맴버아이디와 포스트아이디가 존재하는지 확인
+
+   //라이크 디비에서 맴버아이디와 포스트아이디가 존재하는지 확인
         Optional<Likes> likes1 = likesRepository.findByMemberAndPost(member, post);
         System.out.println(likes1);
         if (likes1.isPresent()) {

@@ -1,4 +1,4 @@
-package com.emergency.challenge.config;//package com.example.advanced.configuration;
+//package com.emergency.challenge.config;
 //
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.context.annotation.Bean;

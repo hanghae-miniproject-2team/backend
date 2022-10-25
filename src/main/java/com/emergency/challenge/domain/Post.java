@@ -60,5 +60,4 @@ public class Post extends Timestamped {
   public void delete() {
     this.deleted = true;
   }
-
 }

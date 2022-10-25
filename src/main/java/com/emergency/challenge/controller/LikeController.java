@@ -16,16 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class LikeController {
     private final LikesService likesService;
 
-//    @ApiImplicitParams({
-//            // 스웨거에서 할당해야하는 값들을 알려주는 Description
-//            @ApiImplicitParam(
-//                    name = "Refresh-Token",
-//                    required = true,
-//                    dataType = "string",
-//                    paramType = "header"
-//            )
-//    })
-
     // 좋아요
     @PostMapping("/auth/post/{postid}/like")
     public ResponseDto<?> Likes(@PathVariable Long postid, @AuthenticationPrincipal UserDetailsImpl userDetails){
