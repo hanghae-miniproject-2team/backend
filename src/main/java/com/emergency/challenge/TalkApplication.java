@@ -12,4 +12,5 @@ public class TalkApplication {
         SpringApplication.run(TalkApplication.class, args);
     }
 
+    
 }
