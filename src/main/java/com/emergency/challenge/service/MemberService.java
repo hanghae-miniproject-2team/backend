@@ -11,6 +11,7 @@ import com.emergency.challenge.domain.UserDetailsImpl;
 import com.emergency.challenge.error.ErrorCode;
 import com.emergency.challenge.jwt.TokenProvider;
 import com.emergency.challenge.repository.MemberRepository;
+import com.emergency.challenge.shared.Authority;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -33,6 +34,7 @@ public class MemberService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider tokenProvider;
+    private static final String ADMIN_TOKEN = "AAABnv/xRVklrnYxKZ0aHgTBcXukeZygoC";
 
     @Transactional
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
@@ -45,12 +47,28 @@ public class MemberService {
             return ResponseDto.fail(ErrorCode.PASSWORDS_NOT_MATCHED.name(),
                      ErrorCode.PASSWORDS_NOT_MATCHED.getMessage());
         }
-
         Member member = Member.builder()
                 .nickname(requestDto.getNickname())
                 .name(requestDto.getName())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
+                .role(Authority.ROLE_MEMBER)
                 .build();
+
+        if(requestDto.isAdmin()){
+            if(!requestDto.getAdminToken().equals(ADMIN_TOKEN)) {
+                return ResponseDto.fail("NOT_ADMIN", "ADMIN토큰이 일치하지 않습니다.");
+            }
+            Member.builder()
+                    .nickname(requestDto.getNickname())
+                    .name(requestDto.getName())
+                    .password(passwordEncoder.encode(requestDto.getPassword()))
+                    .role(Authority.ROLE_ADMIN)
+                    .build();
+        }
+
+
+
+
 
         memberRepository.save(member);
 

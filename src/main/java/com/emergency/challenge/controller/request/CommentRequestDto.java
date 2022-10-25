@@ -12,4 +12,5 @@ public class CommentRequestDto {
     private Long postId;
     private String content;
     private Long responseTo=null;
+//    private boolean deleted = false;
 }

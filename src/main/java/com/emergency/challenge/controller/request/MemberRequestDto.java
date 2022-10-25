@@ -27,4 +27,8 @@ public class MemberRequestDto {
     @NotBlank(message = "{password.notblank}")
     @Pattern(regexp ="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$" , message = "{password.option}" )
     private String passwordConfirm;
+
+    private boolean admin = false;
+
+    private String adminToken = "";
 }

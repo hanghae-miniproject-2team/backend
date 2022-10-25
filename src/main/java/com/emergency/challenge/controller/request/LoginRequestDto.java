@@ -13,4 +13,5 @@ public class LoginRequestDto {
     private String nickname;
     private String password;
 
+
 }

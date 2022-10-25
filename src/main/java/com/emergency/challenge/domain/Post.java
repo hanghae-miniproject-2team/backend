@@ -5,15 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Builder
 @Getter
+@Where(clause = "deleted = false")
+//@SQLDelete(sql = "UPDATE posts SET deleted = true WHERE id = ?")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="post", indexes = @Index(name = "idx_title_deleted", columnList = "title, deleted",unique = true))
+
 public class Post extends Timestamped {
 
   @Id
@@ -39,6 +45,9 @@ public class Post extends Timestamped {
   @ManyToOne(fetch = FetchType.LAZY)
   private Member member;
 
+  @Column(nullable = false)
+  private boolean deleted;
+
   public void update(PostRequestDto postRequestDto) {
     this.title = postRequestDto.getTitle();
     this.content = postRequestDto.getContent().replace("<",">");
@@ -46,6 +55,10 @@ public class Post extends Timestamped {
 
   public boolean validateMember(Member member) {
     return !this.member.equals(member);
+  }
+
+  public void delete() {
+    this.deleted = true;
   }
 
 }

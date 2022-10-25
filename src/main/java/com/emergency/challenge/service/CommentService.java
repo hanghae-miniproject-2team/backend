@@ -55,6 +55,7 @@ public class CommentService {
                     .member(member)
                     .post(post)
                     .content(requestDto.getContent().replace("<",">"))
+
                     .build();
             commentRepository.save(comment);
             return ResponseDto.success(
@@ -219,7 +220,7 @@ public class CommentService {
             return ResponseDto.fail("BAD_REQUEST", "작성자만 수정할 수 있습니다.");
         }
 
-        commentRepository.deleteByIdOrResponseTo(id,id);
+        comment.delete();
         return ResponseDto.success("success");
     }
 

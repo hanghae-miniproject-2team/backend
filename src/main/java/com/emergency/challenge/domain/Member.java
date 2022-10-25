@@ -1,5 +1,6 @@
 package com.emergency.challenge.domain;
 
+import com.emergency.challenge.shared.Authority;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,11 @@ public class Member extends Timestamped {
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Comment> comments;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private Authority role;
+
 
     @Override
     public boolean equals(Object o) {
