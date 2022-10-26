@@ -60,8 +60,8 @@ public class SecurityConfiguration {
                 .antMatchers("/api/member/**").permitAll()
                 .antMatchers("/api/post/**").permitAll()
                 .antMatchers("/api/comment/**").permitAll()
-                .antMatchers("/api/auth/**").hasAnyRole("ROLE_ADMIN","ROLE_MEMBER")
-                .antMatchers("/api/admin/**").hasRole("ROlE_ADMIN")
+                .antMatchers("/api/auth/**").access("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+                .antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/v2/api-docs",
                         "/swagger-resources",
                         "/swagger-resources/**",

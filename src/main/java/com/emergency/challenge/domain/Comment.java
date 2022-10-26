@@ -17,8 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="comment", indexes = @Index(name = "idx_title_deleted", columnList = "content, deleted",unique = true))
-
+//@Table(name="comment", indexes = @Index(name = "idx_title_deleted", columnList = "content, deleted",unique = true))
 public class Comment extends Timestamped {
 
     @Id

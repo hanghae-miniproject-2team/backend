@@ -18,8 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="post", indexes = @Index(name = "idx_title_deleted", columnList = "title, deleted",unique = true))
-
+//@Table(name="post", indexes = @Index(name = "idx_title_deleted", columnList = "title, deleted",unique = true))
 public class Post extends Timestamped {
 
   @Id
