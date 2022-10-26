@@ -36,6 +36,7 @@ public class MemberService {
     private final TokenProvider tokenProvider;
     private static final String ADMIN_TOKEN = "AAABnv/xRVklrnYxKZ0aHgTBcXukeZygoC";
 
+
     @Transactional
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
         if (null != isPresentMember(requestDto.getNickname())) {
@@ -47,6 +48,7 @@ public class MemberService {
             return ResponseDto.fail(ErrorCode.PASSWORDS_NOT_MATCHED.name(),
                      ErrorCode.PASSWORDS_NOT_MATCHED.getMessage());
         }
+
         Member member = Member.builder()
                 .nickname(requestDto.getNickname())
                 .name(requestDto.getName())
@@ -88,12 +90,12 @@ public class MemberService {
     public ResponseDto<?> login(LoginRequestDto requestDto, HttpServletResponse response) {
         Member member = isPresentMember(requestDto.getNickname());
         if (null == member) {
-            return ResponseDto.fail(ErrorCode.MEMBER_NOT_FOUND.name(),
-                     ErrorCode.MEMBER_NOT_FOUND.getMessage());
+            return ResponseDto.fail(ErrorCode.INVALID_MEMBER.name(),
+                     ErrorCode.INVALID_MEMBER.getMessage());
         }
 
         if (!member.validatePassword(passwordEncoder, requestDto.getPassword())) {
-            return ResponseDto.fail(ErrorCode.INVALID_MEMBER.name(), ErrorCode.INVALID_MEMBER.getMessage());
+            return ResponseDto.fail(ErrorCode.INVALID_PASSWORD.name(), ErrorCode.INVALID_PASSWORD.getMessage());
         }
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(requestDto.getNickname(), requestDto.getPassword());

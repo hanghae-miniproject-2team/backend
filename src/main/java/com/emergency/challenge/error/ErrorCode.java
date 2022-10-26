@@ -12,7 +12,8 @@ public enum ErrorCode {
 
     //404 NOT_FOUND 찾지 못함
     MEMBER_NOT_FOUND(404,"사용자를 찾을 수 없습니다."),
-    INVALID_MEMBER(404,"사용자를 찾을 수 없습니다."),
+    INVALID_MEMBER(404,"아이디가 틀렸습니다."),
+    INVALID_PASSWORD(404,"비밀번호가 틀렸습니다."),
     INVALID_TOKEN(404,"Token이 유효하지 않습니다."),
     //409 CONFLICT 중복된 리소스
     ALREADY_SAVED_ID(409, "중복된 아이디입니다."),
