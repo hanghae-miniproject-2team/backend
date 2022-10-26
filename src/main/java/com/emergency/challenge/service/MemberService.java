@@ -133,6 +133,7 @@ public class MemberService {
     //토큰 재발급
     @Transactional
     public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("request.getHeader(\"Refresh-Token\") !!= " + request.getHeader("Refresh-Token"));
         if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
             return ResponseDto.fail(ErrorCode.INVALID_TOKEN.name(), ErrorCode.INVALID_TOKEN.getMessage());
         }
