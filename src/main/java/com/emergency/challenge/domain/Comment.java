@@ -43,7 +43,7 @@ public class Comment extends Timestamped {
     private boolean deleted;
 
     public void update(CommentRequestDto commentRequestDto) {
-        this.content = commentRequestDto.getContent().replace("<",">");
+        this.content = commentRequestDto.getContent().replace("<script>","");
     }
 
     public boolean validateMember(Member member) {

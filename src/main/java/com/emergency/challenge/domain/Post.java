@@ -48,8 +48,8 @@ public class Post extends Timestamped {
   private boolean deleted;
 
   public void update(PostRequestDto postRequestDto) {
-    this.title = postRequestDto.getTitle();
-    this.content = postRequestDto.getContent().replace("<",">");
+    this.title = postRequestDto.getTitle().replace("<script>","");
+    this.content = postRequestDto.getContent().replace("<script>","");
   }
 
   public boolean validateMember(Member member) {
