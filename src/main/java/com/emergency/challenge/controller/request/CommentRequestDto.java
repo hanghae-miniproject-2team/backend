@@ -13,4 +13,7 @@ public class CommentRequestDto {
     private String content;
     private Long responseTo=null;
 //    private boolean deleted = false;
+//   public CommentRequestDto(CommentRequestDto commentRequestDto){
+//        this.content=commentRequestDto.getContent().replace("<script>","");
+//    }
 }

@@ -42,6 +42,10 @@ public class Comment extends Timestamped {
     @Column(nullable = false)
     private boolean deleted;
 
+    public Comment(CommentRequestDto commentRequestDto) {
+        this.content = commentRequestDto.getContent().replace("<script>","");
+    }
+
     public void update(CommentRequestDto commentRequestDto) {
         this.content = commentRequestDto.getContent().replace("<script>","");
     }

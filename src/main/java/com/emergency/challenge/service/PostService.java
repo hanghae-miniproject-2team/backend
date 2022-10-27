@@ -52,7 +52,6 @@ public class PostService {
     Post post = Post.builder()
         .title(requestDto.getTitle())
         .content(requestDto.getContent().replace("<",">"))
-
         .member(member)
         .build();
 
