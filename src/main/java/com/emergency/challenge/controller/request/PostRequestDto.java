@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PostRequestDto {
   private String title;
   private String content;
 //  private boolean deleted = false;
 
-  public PostRequestDto(String title, String content) {
-    this.title = title.replace("<script>","");
-    this.content = content.replace("<script>","");
-  }
+//  public PostRequestDto(String title, String content) {
+//    this.title = title.replace("<script>","");
+//    this.content = content.replace("<script>","");
+//  }
 }

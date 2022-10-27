@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Where(clause = "deleted = false")
-@SQLDelete(sql = "UPDATE posts SET deleted = true WHERE id = ?")
+//@SQLDelete(sql = "UPDATE posts SET deleted = true WHERE id = ?")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -43,11 +43,11 @@ public class Comment extends Timestamped {
     private boolean deleted;
 
     public Comment(CommentRequestDto commentRequestDto) {
-        this.content = commentRequestDto.getContent().replace("<script>","");
+        this.content = commentRequestDto.getContent();
     }
 
     public void update(CommentRequestDto commentRequestDto) {
-        this.content = commentRequestDto.getContent().replace("<script>","");
+        this.content = commentRequestDto.getContent();
     }
 
     public boolean validateMember(Member member) {

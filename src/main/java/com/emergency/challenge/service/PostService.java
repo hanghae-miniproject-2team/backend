@@ -86,7 +86,7 @@ public class PostService {
       commentResponseDtoList.add(
               CommentResponseDto.builder()
                       .id(comment.getId())
-                      .author(comment.getMember().getNickname())
+                      .author(comment.getMember().getName())
                       .content(comment.getContent())
                       .createdAt(comment.getCreatedAt())
                       .modifiedAt(comment.getModifiedAt())
@@ -103,7 +103,7 @@ public class PostService {
                     .content(post.getContent())
                     .likesCount((long) likesCount.size())
                     .hatesCount((long) hatesCount.size())
-                    .author(post.getMember().getNickname())
+                    .author(post.getMember().getName())
                     .commentResponseDtoList(commentResponseDtoList)
                     .createdAt(post.getCreatedAt())
                     .modifiedAt(post.getModifiedAt())
